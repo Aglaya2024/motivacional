@@ -1,97 +1,89 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2580
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoy es tu momento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Georgia", serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted playsinline>
+        <source src="https://mazwai.com/videvo_files/video/free/2015-10/small_watermarked/Clouds_Passing_time-lapse_01_preview.mp4" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+    <div class="container">
+        <h1 id="frase"></h1>
+    </div>
+    
+    <script>
+        const frases = [
+            "Hoy es un nuevo comienzo, aprovéchalo al máximo.",
+            "Cada día es una nueva oportunidad para lograr lo que quieres.",
+            "El éxito comienza con la decisión de intentarlo.",
+            "Nunca subestimes el poder de un día bien aprovechado.",
+            "Lo que hagas hoy determinará tu mañana.",
+            "Cree en ti y nada podrá detenerte.",
+            "Si puedes soñarlo, puedes hacerlo.",
+            "Haz de cada día una obra maestra.",
+            "Todo lo que necesitas está dentro de ti.",
+            "Tienes el poder de cambiar tu historia.",
+            "El éxito es la suma de pequeños esfuerzos repetidos cada día.",
+            "Cada amanecer es una nueva página en blanco.",
+            "Hoy es el día para empezar a construir tus sueños.",
+            "Nada es imposible si te atreves a intentarlo.",
+            "Tu única limitación es la que tú mismo te pones.",
+            "El momento perfecto para empezar es ahora.",
+            "La constancia vence al talento cuando el talento no trabaja duro.",
+            "El miedo es solo una ilusión, atrévete a superarlo.",
+            "El éxito no es magia, es trabajo y determinación.",
+            "La única forma de fallar es rendirse.",
+            "No esperes la motivación, crea el hábito.",
+            "Cada paso que das te acerca a tu meta.",
+            "Hoy es un gran día para darlo todo.",
+            "Esfuérzate hoy para vivir como quieres mañana.",
+            "El cambio empieza cuando decides actuar."
+        ];
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="es">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>Hoy es tu momento</title>\
-    <style>\
-        * \{\
-            margin: 0;\
-            padding: 0;\
-            box-sizing: border-box;\
-        \}\
-        body \{\
-            font-family: "Georgia", serif;\
-            display: flex;\
-            justify-content: center;\
-            align-items: center;\
-            height: 100vh;\
-            background-color: #000;\
-            text-align: center;\
-            color: white;\
-            overflow: hidden;\
-            position: relative;\
-        \}\
-        video \{\
-            position: absolute;\
-            top: 50%;\
-            left: 50%;\
-            transform: translate(-50%, -50%);\
-            width: 100%;\
-            height: 100%;\
-            object-fit: cover;\
-            z-index: -1;\
-        \}\
-        .container \{\
-            position: relative;\
-            background: rgba(0, 0, 0, 0.6);\
-            padding: 20px;\
-            border-radius: 10px;\
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);\
-        \}\
-        h1 \{\
-            font-size: 32px;\
-            font-weight: bold;\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <video autoplay loop muted playsinline>\
-        <source src="https://mazwai.com/videvo_files/video/free/2015-10/small_watermarked/Clouds_Passing_time-lapse_01_preview.mp4" type="video/mp4">\
-        Tu navegador no soporta videos.\
-    </video>\
-    <div class="container">\
-        <h1 id="frase"></h1>\
-    </div>\
-    \
-    <script>\
-        const frases = [\
-            "Hoy es un nuevo comienzo, aprov\'e9chalo al m\'e1ximo.",\
-            "Cada d\'eda es una nueva oportunidad para lograr lo que quieres.",\
-            "El \'e9xito comienza con la decisi\'f3n de intentarlo.",\
-            "Nunca subestimes el poder de un d\'eda bien aprovechado.",\
-            "Lo que hagas hoy determinar\'e1 tu ma\'f1ana.",\
-            "Cree en ti y nada podr\'e1 detenerte.",\
-            "Si puedes so\'f1arlo, puedes hacerlo.",\
-            "Haz de cada d\'eda una obra maestra.",\
-            "Todo lo que necesitas est\'e1 dentro de ti.",\
-            "Tienes el poder de cambiar tu historia.",\
-            "El \'e9xito es la suma de peque\'f1os esfuerzos repetidos cada d\'eda.",\
-            "Cada amanecer es una nueva p\'e1gina en blanco.",\
-            "Hoy es el d\'eda para empezar a construir tus sue\'f1os.",\
-            "Nada es imposible si te atreves a intentarlo.",\
-            "Tu \'fanica limitaci\'f3n es la que t\'fa mismo te pones.",\
-            "El momento perfecto para empezar es ahora.",\
-            "La constancia vence al talento cuando el talento no trabaja duro.",\
-            "El miedo es solo una ilusi\'f3n, atr\'e9vete a superarlo.",\
-            "El \'e9xito no es magia, es trabajo y determinaci\'f3n.",\
-            "La \'fanica forma de fallar es rendirse.",\
-            "No esperes la motivaci\'f3n, crea el h\'e1bito.",\
-            "Cada paso que das te acerca a tu meta.",\
-            "Hoy es un gran d\'eda para darlo todo.",\
-            "Esfu\'e9rzate hoy para vivir como quieres ma\'f1ana.",\
-            "El cambio empieza cuando decides actuar."\
-        ];\
-\
-        document.getElementById("frase").textContent = frases[Math.floor(Math.random() * frases.length)];\
-    </script>\
-</body>\
-</html>\
-}
+        document.getElementById("frase").textContent = frases[Math.floor(Math.random() * frases.length)];
+    </script>
+</body>
+</html>
