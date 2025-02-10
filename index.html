@@ -44,14 +44,14 @@
         .container {
             position: relative;
             background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            max-width: 80%;
+            max-width: 70%;
             animation: fadeIn 1.5s ease-in-out;
         }
         h1 {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: bold;
             font-family: 'Cinzel', serif;
         }
@@ -62,10 +62,10 @@
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" class="logo">
+    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).pngO" alt="Logo Aglaya" class="logo">
     
     <video id="background-video" autoplay loop muted playsinline>
-        <source id="video-source" src="https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/171124-a1-hd-021_QvfwCCTa.mp4" type="video/mp4">
+        <source id="video-source" src="" type="video/mp4">
     </video>
 
     <div class="container">
@@ -86,9 +86,19 @@
             "Tienes el poder de cambiar tu historia."
         ];
 
+        const videos = [
+            "AQUI_PEGA_LA_URL_DEL_VIDEO_1", // VIDEO 1
+            "AQUI_PEGA_LA_URL_DEL_VIDEO_2", // VIDEO 2
+            "AQUI_PEGA_LA_URL_DEL_VIDEO_3"  // VIDEO 3
+        ];
+
+        document.getElementById("video-source").src = videos[Math.floor(Math.random() * videos.length)];
+        document.getElementById("background-video").load();
+        
         document.getElementById("frase").textContent = frases[Math.floor(Math.random() * frases.length)];
     </script>
 </body>
 </html>
+
 
 
