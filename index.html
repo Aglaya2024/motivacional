@@ -30,8 +30,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
             z-index: -1;
         }
@@ -62,10 +62,12 @@
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" alt="Logo Aglaya" class="logo">
+    <img src="AQUI_PEGA_LA_URL_DEL_LOGO" alt="Logo Aglaya" class="logo">
+    
     <video id="background-video" autoplay loop muted playsinline>
-        <source id="video-source" src="" type="video/mp4">
+        <source id="video-source" src="AQUI_PEGA_LA_URL_DEL_VIDEO" type="video/mp4">
     </video>
+
     <div class="container">
         <h1 id="frase"></h1>
     </div>
@@ -83,20 +85,8 @@
             "Todo lo que necesitas está dentro de ti.",
             "Tienes el poder de cambiar tu historia."
         ];
-        
-        const videos = [
-            "https://mazwai.com/videvo_files/video/free/2015-10/small_watermarked/Clouds_Passing_time-lapse_01_preview.mp4",
-            "https://mazwai.com/videvo_files/video/free/2017-02/small_watermarked/Street_Walk_03_preview.mp4",
-            "https://mazwai.com/videvo_files/video/free/2018-06/small_watermarked/Running_River_preview.mp4"
-        ];
-        
-        function nuevaFrase() {
-            document.getElementById("frase").textContent = frases[Math.floor(Math.random() * frases.length)];
-        }
-        
-        document.getElementById("video-source").src = videos[Math.floor(Math.random() * videos.length)];
-        document.getElementById("background-video").load();
-        nuevaFrase();
+
+        document.getElementById("frase").textContent = frases[Math.floor(Math.random() * frases.length)];
     </script>
 </body>
 </html>
