@@ -126,8 +126,7 @@
 
         // Función para asignar una frase aleatoria con intro y outro
         function generarFrase() {
-            const fraseFinal = obtenerAleatorio(intros) + " " + obtenerAleatorio(frases) + " " + obtenerAleatorio(outros);
-            document.getElementById("frase").textContent = fraseFinal;
+            document.getElementById("frase").textContent = fraseCentral;
             leerTexto(fraseFinal); // Llamar a la función de voz
         }
 
