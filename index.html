@@ -126,8 +126,17 @@
 
         // Función para asignar una frase aleatoria con intro y outro
         function generarFrase() {
-            document.getElementById("frase").textContent = fraseCentral;
-            leerTexto(fraseFinal); // Llamar a la función de voz
+            function generarFrase() {
+    const intro = obtenerAleatorio(intros);
+    const fraseCentral = obtenerAleatorio(frases);
+    const outro = obtenerAleatorio(outros);
+    
+    document.getElementById("frase").textContent = fraseCentral; // ✅ SOLO MOSTRAR LA FRASE CENTRAL
+
+    const fraseFinal = `${intro} ${fraseCentral} ${outro}`; // ✅ ESTA ES LA FRASE COMPLETA PARA LA VOZ
+    leerTexto(fraseFinal); // ✅ Llamar a la voz con intro y outro
+}
+
         }
 
         // Función para obtener un video aleatorio
@@ -137,19 +146,35 @@
 
         // Función para leer el texto en voz alta
         function leerTexto(texto) {
-            if ('speechSynthesis' in window) {
-                const mensaje = new SpeechSynthesisUtterance(texto);
-                
-                // Obtener las voces disponibles en el navegador
-                const vocesDisponibles = speechSynthesis.getVoices();
+    if ('speechSynthesis' in window) {
+        const mensaje = new SpeechSynthesisUtterance(texto);
 
-                // Filtrar voces en español
-                const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
+        // Asegurar que las voces estén cargadas antes de seleccionarlas
+        speechSynthesis.onvoiceschanged = () => {
+            const vocesDisponibles = speechSynthesis.getVoices();
+            const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
 
-                // Seleccionar una voz aleatoria
-                if (vocesEspanol.length > 0) {
-                    mensaje.voice = obtenerAleatorio(vocesEspanol);
-                }
+            if (vocesEspanol.length > 0) {
+                mensaje.voice = obtenerAleatorio(vocesEspanol);
+            }
+
+            speechSynthesis.speak(mensaje);
+        };
+
+        // Si las voces ya están cargadas, ejecutarlas directamente
+        const vocesDisponibles = speechSynthesis.getVoices();
+        if (vocesDisponibles.length > 0) {
+            const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
+            if (vocesEspanol.length > 0) {
+                mensaje.voice = obtenerAleatorio(vocesEspanol);
+            }
+            speechSynthesis.speak(mensaje);
+        }
+    } else {
+        console.log("Tu navegador no soporta Speech Synthesis API");
+    }
+}
+
 
                 // Reproducir la voz
                 speechSynthesis.speak(mensaje);
