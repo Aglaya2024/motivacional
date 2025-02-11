@@ -59,22 +59,9 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        /* 🔊 Botón invisible para desbloquear audio en móviles */
-        #startButton {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0; /* Invisible */
-            z-index: 10;
-        }
     </style>
 </head>
 <body>
-    <!-- BOTÓN INVISIBLE PARA DESBLOQUEAR AUDIO EN MÓVILES -->
-    <button id="startButton"></button>
-
     <!-- LOGO -->
     <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" alt="Logo Aglaya" class="logo">
     
@@ -145,8 +132,11 @@
 
             document.getElementById("frase").textContent = fraseCentral;
 
-            const fraseFinal = `${intro} ${fraseCentral} ${outro}`;
-            setTimeout(() => leerTexto(fraseFinal), 1000);
+            // Solo hablar en computadoras
+            if (!esMovil()) {
+                const fraseFinal = `${intro} ${fraseCentral} ${outro}`;
+                setTimeout(() => leerTexto(fraseFinal), 1000);
+            }
         }
 
         function obtenerVideoAleatorio() {
@@ -171,28 +161,24 @@
             }
         }
 
-        function desbloquearAudio() {
-            const audioSilencioso = new Audio("data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAwNQAABAAAAA...");
-            audioSilencioso.play().catch(() => console.log("No fue necesario desbloquear el audio."));
+        function esMovil() {
+            return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
         }
 
-        function iniciarExperiencia() {
-            desbloquearAudio();
+        // Asignar frase y video aleatorio al cargar la página
+        window.addEventListener("load", () => {
             generarFrase();
-            document.getElementById("startButton").remove();
-            
+
+            // ✅ Cambiar el video aleatorio al cargar
             const videoElemento = document.getElementById("background-video");
             const fuenteVideo = document.getElementById("video-source");
             fuenteVideo.src = obtenerVideoAleatorio();
             videoElemento.load();
-        }
-
-        window.addEventListener("load", () => {
-            document.getElementById("startButton").addEventListener("click", iniciarExperiencia, { once: true });
         });
     </script>
 </body>
 </html>
+
 
 
 
