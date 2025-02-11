@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -48,13 +48,16 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             max-width: 70%;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out;
         }
         h1 {
             font-size: 24px;
             font-weight: bold;
             font-family: 'Cinzel', serif;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -68,11 +71,20 @@
     </video>
 
     <!-- CONTENEDOR DE FRASE -->
-    <div class="container" id="frase-container">
+    <div class="container">
         <h1 id="frase"></h1>
     </div>
     
     <script>
+        // Lista de introducciones aleatorias
+        const intros = [
+            "Presta atención...",
+            "Escucha con atención...",
+            "Este mensaje es para ti...",
+            "Es momento de reflexionar...",
+            "Hoy es un buen día para escucharlo..."
+        ];
+
         // Lista de frases motivacionales
         const frases = [
             "Hoy es un nuevo comienzo, aprovéchalo al máximo.",
@@ -87,46 +99,83 @@
             "Tienes el poder de cambiar tu historia."
         ];
 
+        // Lista de mensajes finales aleatorios
+        const outros = [
+            "Si lo deseas, vuelve a escanear cuando lo necesites.",
+            "Cuando lo necesites, este mensaje estará aquí para ti.",
+            "Recuerda esto y vuelve cuando necesites inspiración.",
+            "Que estas palabras te acompañen. Hasta la próxima.",
+            "Guarda este mensaje en tu corazón y regresa cuando lo necesites."
+        ];
+
         // Lista de URLs de los videos alojados en GitHub
         const videos = [
             "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO1.mp4",
             "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO2.mp4",
             "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO3.mp4",
             "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO4.mp4",
-            "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO5.mp4"
+            "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO5.mp4",
+            "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO6.mp4",
+            "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO7.mp4",
+            "https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO8.mp4",
         ];
 
+        // Obtener valores aleatorios
         function obtenerAleatorio(lista) {
             return lista[Math.floor(Math.random() * lista.length)];
         }
 
-        function mostrarFrase() {
-            document.getElementById("frase").textContent = obtenerAleatorio(frases);
-            document.getElementById("frase-container").style.opacity = 1;
+        function generarFrase() {
+            const intro = obtenerAleatorio(intros);
+            const fraseCentral = obtenerAleatorio(frases);
+            const outro = obtenerAleatorio(outros);
+
+            document.getElementById("frase").textContent = fraseCentral;
+
+            // Solo hablar en computadoras
+            if (!esMovil()) {
+                const fraseFinal = ${intro} ${fraseCentral} ${outro};
+                setTimeout(() => leerTexto(fraseFinal), 1000);
+            }
         }
 
         function obtenerVideoAleatorio() {
             return obtenerAleatorio(videos) + "?t=" + new Date().getTime();
         }
 
+        function leerTexto(texto) {
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                mensaje.rate = 0.9;
+
+                const vocesDisponibles = speechSynthesis.getVoices();
+                const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
+
+                if (vocesEspanol.length > 0) {
+                    mensaje.voice = obtenerAleatorio(vocesEspanol);
+                }
+
+                setTimeout(() => speechSynthesis.speak(mensaje), 1500);
+            } else {
+                console.log("Tu navegador no soporta Speech Synthesis API");
+            }
+        }
+
+        function esMovil() {
+            return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
         // Asignar frase y video aleatorio al cargar la página
         window.addEventListener("load", () => {
+            generarFrase();
+
+            // ✅ Cambiar el video aleatorio al cargar
             const videoElemento = document.getElementById("background-video");
             const fuenteVideo = document.getElementById("video-source");
             fuenteVideo.src = obtenerVideoAleatorio();
             videoElemento.load();
-
-            setTimeout(mostrarFrase, 2000); // Aparece la frase con fundido después de 2 segundos
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
+ChatGPT Plus
