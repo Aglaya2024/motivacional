@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -63,11 +63,11 @@
 </head>
 <body>
     <!-- LOGO -->
-    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" alt="Logo Aglaya" class="logo">
+    <img src="PON_URL_DEL_LOGO_AQUI" alt="Logo Aglaya" class="logo">
     
     <!-- VIDEO DE FONDO -->
     <video id="background-video" autoplay loop muted playsinline>
-        <source id="video-source" src="" type="video/mp4">
+        <source id="video-source" src="https://github.com/Aglaya2024/motivacional/raw/refs/heads/main/VIDEO1.mp4" type="video/mp4">
     </video>
 
     <!-- CONTENEDOR DE FRASE -->
@@ -125,56 +125,67 @@
             return lista[Math.floor(Math.random() * lista.length)];
         }
 
+        // Función para asignar una frase aleatoria con intro y outro
         function generarFrase() {
             const intro = obtenerAleatorio(intros);
             const fraseCentral = obtenerAleatorio(frases);
             const outro = obtenerAleatorio(outros);
 
-            document.getElementById("frase").textContent = fraseCentral;
+            document.getElementById("frase").textContent = fraseCentral; // ✅ SOLO MUESTRA LA FRASE CENTRAL
 
-            // Solo hablar en computadoras
-            if (!esMovil()) {
-                const fraseFinal = ${intro} ${fraseCentral} ${outro};
-                setTimeout(() => leerTexto(fraseFinal), 1000);
-            }
+            const fraseFinal = `${intro} ${fraseCentral} ${outro}`; // ✅ INTRO Y OUTRO SOLO EN VOZ
+            setTimeout(() => leerTexto(fraseFinal), 1000); // ✅ PEQUEÑA PAUSA ANTES DE HABLAR
         }
 
+        // Función para obtener un video aleatorio
         function obtenerVideoAleatorio() {
-            return obtenerAleatorio(videos) + "?t=" + new Date().getTime();
+            return obtenerAleatorio(videos) + "?t=" + new Date().getTime(); // Evita la caché del navegador
         }
 
+        // Función para leer el texto en voz alta
         function leerTexto(texto) {
             if ('speechSynthesis' in window) {
                 const mensaje = new SpeechSynthesisUtterance(texto);
-                mensaje.rate = 0.9;
 
+                // Asegurar que las voces estén cargadas antes de seleccionarlas
+                speechSynthesis.onvoiceschanged = () => {
+                    const vocesDisponibles = speechSynthesis.getVoices();
+                    const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
+
+                    if (vocesEspanol.length > 0) {
+                        mensaje.voice = obtenerAleatorio(vocesEspanol);
+                    }
+
+                    speechSynthesis.speak(mensaje);
+                };
+
+                // Si las voces ya están cargadas, ejecutarlas directamente
                 const vocesDisponibles = speechSynthesis.getVoices();
-                const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
-
-                if (vocesEspanol.length > 0) {
-                    mensaje.voice = obtenerAleatorio(vocesEspanol);
+                if (vocesDisponibles.length > 0) {
+                    const vocesEspanol = vocesDisponibles.filter(voz => voz.lang.startsWith('es'));
+                    if (vocesEspanol.length > 0) {
+                        mensaje.voice = obtenerAleatorio(vocesEspanol);
+                    }
+                    setTimeout(() => speechSynthesis.speak(mensaje), 2000); // ✅ PAUSA ENTRE FRASES
                 }
-
-                setTimeout(() => speechSynthesis.speak(mensaje), 1500);
             } else {
                 console.log("Tu navegador no soporta Speech Synthesis API");
             }
         }
 
-        function esMovil() {
-            return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        }
-
         // Asignar frase y video aleatorio al cargar la página
         window.addEventListener("load", () => {
             generarFrase();
-
+            
             // ✅ Cambiar el video aleatorio al cargar
             const videoElemento = document.getElementById("background-video");
             const fuenteVideo = document.getElementById("video-source");
-            fuenteVideo.src = obtenerVideoAleatorio();
+            const nuevoVideo = obtenerVideoAleatorio();
+            
+            fuenteVideo.src = nuevoVideo;
             videoElemento.load();
         });
+
     </script>
 </body>
 </html>
