@@ -34,6 +34,8 @@
             height: 100vh;
             object-fit: cover;
             z-index: -1;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
         }
         .logo {
             position: absolute;
@@ -60,7 +62,7 @@
 </head>
 <body>
     <!-- LOGO -->
-    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" class="logo">
+    <img src="https://raw.githubusercontent.com/Aglaya2024/motivacional/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52).png" alt="Logo Aglaya" class="logo">
     
     <!-- VIDEO DE FONDO -->
     <video id="background-video" autoplay loop muted playsinline>
@@ -116,7 +118,11 @@
             fuenteVideo.src = obtenerVideoAleatorio();
             videoElemento.load();
 
-            setTimeout(mostrarFrase, 4000); // Ahora la frase aparece después de 4 segundos para permitir la carga del video
+            setTimeout(() => {
+                videoElemento.style.opacity = 1;
+            }, 500); // Fundido suave del video
+
+            setTimeout(mostrarFrase, 4000); // La frase aparece después de 4 segundos
         });
     </script>
 </body>
